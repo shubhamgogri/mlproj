@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 from src.components.data_transform import DataTransformation, DataTransformationConfig
+from src.components.train_model import ModelTrainConfig, ModelTrainer
+
 
 # this class consists of the file paths of all the csv data files.  
 @dataclass
@@ -49,5 +51,7 @@ if __name__ =="__main__":
     train_data, test_data = data_ingestion_obj.initiate_data_ingestion()
     
     data_transformation_obj = DataTransformation()
-    data_transformation_obj.initiate_data_transformation(train_data, test_data)
+    train_array, test_array,_ = data_transformation_obj.initiate_data_transformation(train_data, test_data)
     
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_array=train_array,test_array=test_array))
